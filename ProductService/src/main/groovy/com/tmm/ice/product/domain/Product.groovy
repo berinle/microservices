@@ -14,14 +14,16 @@ class Product {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id
-	
+
 	private Integer version
-	
+
 	@Column(unique=true)
 	private String name
-	
-	List<InsurableObject> insurableObjects = new ArrayList<InsurableObject>()
-	
+
+	@javax.persistence.OneToMany(mappedBy = "product")
+	List<Insurable> insurable = new ArrayList<Insurable>()
+
+	@javax.persistence.OneToMany(mappedBy = "product")
 	List<Question> questions = new ArrayList<Question>()
-	
+
 }

@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.Column
+import javax.persistence.ManyToOne
 import groovy.transform.EqualsAndHashCode
 
 
@@ -15,6 +16,15 @@ class Question {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id
-	
+
 	private String text
+
+	@ManyToOne(optional = false)
+	private Product product
+
+	@ManyToOne(optional = false)
+	private Insurable insurable
+
+	@ManyToOne(optional = false)
+	private Cover cover
 }

@@ -3,6 +3,11 @@ spring:
   application:
      name: quote-service
 
+  data:
+    mongodb:
+      host: 192.168.31.134
+      port: 27017
+
 # Discovery Server Access
 eureka:
   client:
