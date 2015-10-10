@@ -1,0 +1,46 @@
+#registry
+registry:
+  build: ServiceRegistry
+  ports:
+    - "8761:8761"
+
+#service #1
+product-service:
+  build: ProductService
+  links:
+    - mysql
+    - registry
+  ports:
+    - "2223:2223"
+
+#service #2
+quote-service:
+  build: QuoteService
+  links:
+    - mongo
+    - registry
+  ports:
+    - "2222:2222"
+
+#edge server
+edge:
+  build: EdgeServer
+  links:
+    - registry
+  ports:
+    - "8765:8765"
+
+## dependencies
+#mysql
+mysql:
+  image: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+  ports:
+    - "3306:3306"
+
+#mongo
+mongo:
+  image: mongo
+  ports:
+    - "27017:27017"
